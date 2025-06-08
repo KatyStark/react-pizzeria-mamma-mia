@@ -73,6 +73,57 @@ footer {
   }
 }
 
+.contenedorRegistro{
+  display: flex;
+  justify-content: center;
+}
+
+.registro{
+  text-align: center;
+  border: 2px solid #ffa6003e;
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40%;
+  form{
+    display: flex;
+    text-align: start;
+    align-items: center;
+    flex-direction: column;
+  }
+  input{
+    width: 60%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #0000006e;
+  }
+  p{
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: orange;
+    border-radius: 5px;
+    width: 25%;
+    height: 35px;
+    border: 1px solid rgb(191, 119, 24);
+  }
+  button:hover{
+    background-color: #f8c669;
+  }
+  button:active{
+    background-color: #905f05;
+  }
+  h3{
+    margin-top: 20px;
+  }
+  hr{
+    border: 1px solid orange;
+  }
+}
+
 /*:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
