@@ -123,3 +123,21 @@ footer {
     border: 1px solid orange;
   }
 }
+
+.card{
+  button:hover{
+    background-color: gray;
+  }
+  button:active{
+    background-color: #f8c669;
+  }
+}
+
+.cart{
+  button:hover{
+    background-color: gray;
+  }
+  button:active{
+    background-color: #f8c669;
+  }
+}

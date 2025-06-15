@@ -26,7 +26,7 @@ const Cart = () => {
   const total = cart.reduce((acc, item) => acc + item.price * item.count, 0)
 
   return (
-    <div className="container mt-5 mb-4">
+    <div className="container mt-5 mb-4 cart">
       <h4 className='mb-4 mt-4'>Detalles del pedido:</h4>
       {cart.map(item => (
         <div key={item.id} className="d-flex align-items-center justify-content-between border-bottom py-2">
