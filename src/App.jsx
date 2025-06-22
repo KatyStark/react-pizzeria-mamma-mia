@@ -4,20 +4,22 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Navbar from './components/Navbar'
 import Home from './components/Home'
-import Cart from './components/Cart'
+//import Cart from './components/Cart'
 import Footer from './components/Footer'
-//import RegisterPage from './components/RegisterPage';
-//import LoginPage from './components/LoginPage';
+//import RegisterPage from './components/RegisterPage'
+//import LoginPage from './components/LoginPage'
+import Pizza from './components/Pizza'
 
 function App() {
 
   return (
     <>
       <Navbar/>
-      <Home/>
-      <Cart />
+      {/*<Home/>*/}
+      {/*<Cart />*/}
       {/*<RegisterPage/>*/}
       {/*<LoginPage/>*/}
+      <Pizza />
       <Footer/>
     </>
   )
