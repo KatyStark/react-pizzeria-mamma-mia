@@ -1,25 +1,32 @@
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import Navbar from './components/Navbar'
-import Home from './components/Home'
-//import Cart from './components/Cart'
 import Footer from './components/Footer'
-//import RegisterPage from './components/RegisterPage'
-//import LoginPage from './components/LoginPage'
-import Pizza from './components/Pizza'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './views/HomePage'
+import LoginPage from './views/LoginPage'
+import RegisterPage from './views/RegisterPage'
+import CartPage from './views/CartPage'
+import ProfilePage from './views/ProfilePage'
+import NotFound from './views/NotFound'
+import PizzaPage from './views/PizzaPage'
 
 function App() {
 
   return (
     <>
       <Navbar/>
-      {/*<Home/>*/}
-      {/*<Cart />*/}
-      {/*<RegisterPage/>*/}
-      {/*<LoginPage/>*/}
-      <Pizza />
+      <Routes>
+        <Route path='/' element={<HomePage/>} />
+        <Route path='/login' element={<LoginPage/>} />
+        <Route path='/register' element={<RegisterPage/>} />
+        <Route path='/profile' element={<ProfilePage/>} />
+        <Route path='/cart' element={<CartPage/>} />
+        <Route path='/pizza/p001' element={<PizzaPage/>} />
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
       <Footer/>
     </>
   )

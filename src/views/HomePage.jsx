@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Header from './Header'
+import Header from '../components/Header'
 
-const Home = () => {
+const HomePage = () => {
   const [pizzas, setPizzas] = useState([])
 
   useEffect(() => {
@@ -47,4 +47,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

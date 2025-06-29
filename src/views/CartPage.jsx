@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { pizzas } from '../data/pizzas'
 
-const Cart = () => {
+const CartPage = () => {
   const [cart, setCart] = useState(
   pizzas.slice(0, 3).map(item => ({ ...item, count: item.count ?? 1 }))
 )
@@ -61,4 +61,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default CartPage

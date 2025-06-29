@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Pizza = () => {
+const PizzaPage = () => {
   const [pizza, setPizza] = useState({})
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const Pizza = () => {
   )
 }
 
-export default Pizza
+export default PizzaPage
