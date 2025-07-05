@@ -13,15 +13,17 @@ nav {
     border: 1px solid white;
     border-radius: 4px;
   }
+
   button:hover {
     background-color: gray;
   }
-  button:active{
+
+  button:active {
     background-color: #905f05;
   }
 }
 
-.botones-sin-decoracion{
+.botones-sin-decoracion {
   color: white;
   text-decoration: none;
 }
@@ -145,11 +147,71 @@ footer {
   }
 }
 
+.cartContenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .cart {
+  display: flex;
+  justify-content: center;
+  text-align: start;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 40px;
+  }
+  p{
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  button {
+    background-color: black;
+    color: white;
+    width: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   button:hover {
     background-color: gray;
   }
+  button:active {
+    background-color: #f8c669;
+  }
+}
 
+.cart2{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  h3{
+    margin-top: 20px;
+  }
+  button {
+    background-color: black;
+    color: white;
+    width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button:hover {
+    background-color: gray;
+  }
   button:active {
     background-color: #f8c669;
   }
@@ -203,7 +265,7 @@ footer {
   grid-template-columns: 2fr 4fr;
 }
 
-.perfil2{
+.perfil2 {
   grid-area: lado;
   display: flex;
   justify-content: center;
@@ -213,21 +275,23 @@ footer {
   background-color: #0B1C3A;
   color: orange;
   width: 100%;
-  img{
+
+  img {
     width: 200px;
     margin-top: 30px;
     margin-bottom: 30px;
   }
 }
 
-.perfil3{
+.perfil3 {
   grid-area: principal;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   background-color: #e9ac3bb0;
-  button{
+
+  button {
     background-color: #0B1C3A;
     color: orange;
     width: 180px;
@@ -236,25 +300,31 @@ footer {
     font-size: 20px;
     margin-top: 20px;
   }
-  button:hover{
+
+  button:hover {
     background-color: #35357c;
   }
-  button:active{
+
+  button:active {
     background-color: #905f05;
   }
-  ul{
+
+  ul {
     list-style: none;
     margin-bottom: 30px;
-    li{
+
+    li {
       margin-top: 10px;
     }
-    a{
+
+    a {
       text-decoration: none;
       color: #0B1C3A;
       font-size: 20px;
     }
   }
-  h3{
+
+  h3 {
     color: #0B1C3A;
     margin-bottom: 30px;
     font-size: 40px;

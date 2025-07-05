@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
+import { useCart } from '../context/cartContext'
+import AgregarPizzas from '../components/AgregarPizzas'
 
 const HomePage = () => {
   const [pizzas, setPizzas] = useState([])
+  const { addToCart } = useCart()
+  const [addedPizzaId, setAddedPizzaId] = useState(null)
 
   useEffect(() => {
     const consultarApi = async () => {
@@ -35,15 +39,20 @@ const HomePage = () => {
                   <h5 className="card-text mt-3 text-center fs-3">Precio: ${pizza.price}</h5>
                   <div className="d-flex justify-content-between mt-3 mb-3 mx-5">
                     <button className="btn btn-outline-secondary text-dark">Ver Más 👀</button>
-                    <button className="btn btn-dark btn-outline-secondary text-white">Añadir 🛒</button>
+                    {/*Llamando componente con la funcionalidad para agregar pizzas al carrito*/}
+                    <AgregarPizzas pizza={pizza} onAdded={() => {setAddedPizzaId(pizza.id); setTimeout(() => setAddedPizzaId(null), 1000);}}/>
                   </div>
+                  {/*Mensaje de aviso para que el cliente sepa que agrego la pizza */}
+                  {addedPizzaId === pizza.id && (
+                    <div className="text-success text-center animate-added mt-2">¡Pizza añadida! 🍕</div>
+                  )}
                 </div>
               </div>
             </div>
           ))
         }
       </div>
-    </div>
+    </div >
   )
 }
 

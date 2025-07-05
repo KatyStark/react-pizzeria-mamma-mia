@@ -1,9 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useCart } from '../context/cartContext'
 
 const Navbar = () => {
-  const total = 25000;
-  const token = true;
+  const token = true
+  const { getTotal, cart } = useCart()
+  const [total, setTotal] = useState(0)
+
+  // Actualizar total cuando el cart cambie
+  useEffect(() => {
+    const totalValue = getTotal();
+    setTotal(totalValue);
+  }, [cart]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-custom px-3">
@@ -27,7 +35,7 @@ const Navbar = () => {
         <div>
           <button>
             <Link className='botones-sin-decoracion' to="/cart">
-              🛒 Total: ${total.toLocaleString("es-CL")}
+              🛒 Total: ${Number(total).toLocaleString("es-CL")}
             </Link>
           </button>
         </div>
