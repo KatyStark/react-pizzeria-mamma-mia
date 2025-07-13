@@ -2,11 +2,11 @@ import React from "react";
 import { useCart } from "../context/cartContext";
 import Aumentar from "../components/Aumentar";
 import Disminuir from "../components/Disminuir";
-import { useUser } from "../context/UserContext"; // 👈 nuevo import
+import { useUser } from "../context/userContext"; 
 
 const CartPage = () => {
   const { cart, getTotal } = useCart();
-  const { token } = useUser(); // 👈 usando UserContext
+  const { token } = useUser(); 
 
   return (
     <div className="cartContenedor">
@@ -35,7 +35,7 @@ const CartPage = () => {
 
       <div className="cart2">
         <h3>Total: ${getTotal().toLocaleString("es-CL")}</h3>
-        {/* 👇 Botón pagar deshabilitado si no hay token */}
+        {/*Botón pagar deshabilitado si no hay token */}
         <button disabled={!token}>Pagar</button>
       </div>
     </div>
