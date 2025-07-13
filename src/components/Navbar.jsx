@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/cartContext'
-import { useUser } from '../context/UserContext' // 👈 nuevo import
+import { useUser } from '../context/userContext'
 
 const Navbar = () => {
-  const { token, logout } = useUser() // 👈 usando UserContext
+  const { token, logout } = useUser()
   const { getTotal, cart } = useCart()
   const [total, setTotal] = useState(0)
 
@@ -23,7 +23,7 @@ const Navbar = () => {
             <Link className='botones-sin-decoracion' to="/">🍕 Home</Link>
           </button>
 
-          {/* 👇 Botones condicionales según token */}
+          {/*Botones condicionales según token */}
           {token ? (
             <>
               <button>

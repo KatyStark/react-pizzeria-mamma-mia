@@ -13,11 +13,10 @@ import ProfilePage from './views/ProfilePage'
 import NotFound from './views/NotFound'
 import PizzaPage from './views/PizzaPage'
 import { CartProvider } from './context/cartContext'
-import { useContext } from 'react'
-import { UserContext } from './context/userContext'
+import { useUser } from './context/userContext'
 
 function App() {
-  const { token } = useContext(UserContext);
+  const { token } = useUser()
 
   return (
     <>
@@ -38,4 +37,4 @@ function App() {
   )
 }
 
-export default App
+export default  App
