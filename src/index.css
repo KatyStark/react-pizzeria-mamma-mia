@@ -170,7 +170,7 @@ footer {
     object-fit: cover;
     margin-right: 40px;
   }
-  p{
+  p {
     margin-top: 20px;
     font-weight: bold;
   }
@@ -193,12 +193,12 @@ footer {
   }
 }
 
-.cart2{
+.cart2 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  h3{
+  h3 {
     margin-top: 20px;
   }
   button {
@@ -215,6 +215,11 @@ footer {
   button:active {
     background-color: #f8c669;
   }
+  button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 }
 
 .error {
@@ -222,7 +227,7 @@ footer {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #0B1C3A;
+  background-color: #0b1c3a;
 
   h1 {
     color: orange;
@@ -242,7 +247,7 @@ footer {
     width: 300px;
     border-radius: 10px;
     border: 2px solid orange;
-    background-color: #0B1C3A;
+    background-color: #0b1c3a;
     margin-top: 20px;
     margin-bottom: 20px;
   }
@@ -261,7 +266,7 @@ footer {
 
 .perfil {
   display: grid;
-  grid-template-areas: 'lado principal' 'lado principal';
+  grid-template-areas: "lado principal" "lado principal";
   grid-template-columns: 2fr 4fr;
 }
 
@@ -272,7 +277,7 @@ footer {
   text-align: center;
   align-items: center;
   flex-direction: column;
-  background-color: #0B1C3A;
+  background-color: #0b1c3a;
   color: orange;
   width: 100%;
 
@@ -292,7 +297,7 @@ footer {
   background-color: #e9ac3bb0;
 
   button {
-    background-color: #0B1C3A;
+    background-color: #0b1c3a;
     color: orange;
     width: 180px;
     height: 40px;
@@ -319,13 +324,13 @@ footer {
 
     a {
       text-decoration: none;
-      color: #0B1C3A;
+      color: #0b1c3a;
       font-size: 20px;
     }
   }
 
   h3 {
-    color: #0B1C3A;
+    color: #0b1c3a;
     margin-bottom: 30px;
     font-size: 40px;
   }

@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from './views/HomePage'
 import LoginPage from './views/LoginPage'
 import RegisterPage from './views/RegisterPage'
@@ -13,8 +13,11 @@ import ProfilePage from './views/ProfilePage'
 import NotFound from './views/NotFound'
 import PizzaPage from './views/PizzaPage'
 import { CartProvider } from './context/cartContext'
+import { useContext } from 'react'
+import { UserContext } from './context/userContext'
 
 function App() {
+  const { token } = useContext(UserContext);
 
   return (
     <>
@@ -22,11 +25,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/login' element={token ? <Navigate to="/" replace /> : <LoginPage/>} />
+          <Route path='/register' element={token ? <Navigate to="/" replace /> : <RegisterPage />} />
+          <Route path='/profile' element={!token ? <Navigate to="/login" replace /> : <ProfilePage />} />
           <Route path='/cart' element={<CartPage />} />
-          <Route path='/pizza/p001' element={<PizzaPage />} />
+          <Route path='/pizza/:id' element={<PizzaPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

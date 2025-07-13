@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/cartContext'
+import { useUser } from '../context/UserContext' // 👈 nuevo import
 
 const Navbar = () => {
-  const token = true
+  const { token, logout } = useUser() // 👈 usando UserContext
   const { getTotal, cart } = useCart()
   const [total, setTotal] = useState(0)
 
@@ -21,17 +22,27 @@ const Navbar = () => {
           <button>
             <Link className='botones-sin-decoracion' to="/">🍕 Home</Link>
           </button>
-          <button>
-            <Link className='botones-sin-decoracion' to="/login">🔐 Login</Link>
-          </button>
-          <button>
-            <Link className='botones-sin-decoracion' to="/register">📝 Register</Link>
-          </button>
-          <button>
-            <Link className='botones-sin-decoracion' to="/profile">👤 Profile</Link>
-          </button>
-          <button>🔒 Logout</button>
+
+          {/* 👇 Botones condicionales según token */}
+          {token ? (
+            <>
+              <button>
+                <Link className='botones-sin-decoracion' to="/profile">👤 Profile</Link>
+              </button>
+              <button onClick={logout}>🔒 Logout</button>
+            </>
+          ) : (
+            <>
+              <button>
+                <Link className='botones-sin-decoracion' to="/login">🔐 Login</Link>
+              </button>
+              <button>
+                <Link className='botones-sin-decoracion' to="/register">📝 Register</Link>
+              </button>
+            </>
+          )}
         </div>
+
         <div>
           <button>
             <Link className='botones-sin-decoracion' to="/cart">
