@@ -4,15 +4,19 @@ import { useCart } from '../context/cartContext'
 import { useUser } from '../context/userContext'
 
 const Navbar = () => {
-  const { token, logout } = useUser()
-  const { getTotal, cart } = useCart()
+  const { token, logoutUser } = useUser()
+  const { getTotal, cart, resetCart } = useCart()
   const [total, setTotal] = useState(0)
 
-  // Actualizar total cuando el cart cambie
   useEffect(() => {
     const totalValue = getTotal();
     setTotal(totalValue);
   }, [cart]);
+
+  const handleLogout = () => {
+    logoutUser();
+    resetCart(); //vacía el carrito al cerrar sesión
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-custom px-3">
@@ -23,13 +27,12 @@ const Navbar = () => {
             <Link className='botones-sin-decoracion' to="/">🍕 Home</Link>
           </button>
 
-          {/*Botones condicionales según token */}
           {token ? (
             <>
               <button>
                 <Link className='botones-sin-decoracion' to="/profile">👤 Profile</Link>
               </button>
-              <button onClick={logout}>🔒 Logout</button>
+              <button onClick={handleLogout}>🔒 Logout</button> {/* ⬅ se actualiza aquí */}
             </>
           ) : (
             <>

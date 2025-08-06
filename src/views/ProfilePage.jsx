@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/userContext';
+import { useCart } from '../context/cartContext'; // ⬅ importar resetCart
 
 const ProfilePage = () => {
-  // Por ahora, datos estáticos como se pidió
-  const userEmail = 'katyamp95@gmail.com';
+  const { getProfile, logoutUser } = useUser();
+  const { resetCart } = useCart(); // ⬅ usar resetCart
+  const [userEmail, setUserEmail] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const data = await getProfile();
+      if (data && data.email) {
+        setUserEmail(data.email);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  const handleLogout = () => {
+    logoutUser();
+    resetCart(); // ⬅ vaciar carrito al cerrar sesión
+    navigate('/');
+  };
 
   return (
     <div className="perfil">
       <div className='perfil2'>
         <img src="/img/pizzaperfil.png" alt="Logo pizza" />
-        <h3>Katherin Mendoza</h3>
         <p>{userEmail}</p>
         <img src="/img/pizzaperfil.png" alt="Logo pizza" />
       </div>
@@ -22,7 +42,7 @@ const ProfilePage = () => {
           <li><a href="#">💳 Tarjetas</a></li>
           <li><a href="#">📦 Mis pedidos</a></li>
         </ul>
-        <button>Cerrar sesión</button>
+        <button onClick={handleLogout}>Cerrar sesión</button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCart } from "../context/cartContext";
 import Aumentar from "../components/Aumentar";
 import Disminuir from "../components/Disminuir";
@@ -7,6 +7,26 @@ import { useUser } from "../context/userContext";
 const CartPage = () => {
   const { cart, getTotal } = useCart();
   const { token } = useUser(); 
+  const [mensaje, setMensaje] = useState("");
+
+  const handleCheckout = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ cart }),
+      });
+
+      if (!response.ok) throw new Error("Error al procesar el pedido");
+
+      setMensaje("¡Compra realizada con éxito!");
+    } catch (error) {
+      setMensaje("Error al procesar la compra");
+    }
+  };
 
   return (
     <div className="cartContenedor">
@@ -35,8 +55,8 @@ const CartPage = () => {
 
       <div className="cart2">
         <h3>Total: ${getTotal().toLocaleString("es-CL")}</h3>
-        {/*Botón pagar deshabilitado si no hay token */}
-        <button disabled={!token}>Pagar</button>
+        <button disabled={!token || cart.length === 0} onClick={handleCheckout}>Pagar</button>
+        {mensaje && <p>{mensaje}</p>}
       </div>
     </div>
   );

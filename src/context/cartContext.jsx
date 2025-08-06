@@ -1,22 +1,33 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react";
+import { useUser } from "./userContext"; // ✅ Importación corregida
 
-const CartContext = createContext()
+const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    const stored = localStorage.getItem("cart")
-    return stored ? JSON.parse(stored) : []
-  });
+  const { email } = useUser(); // ✅ Se obtiene el email del usuario logueado
+  const [cart, setCart] = useState([]);
 
-  //Guardar carrito
+  // ✅ Cargar carrito del usuario al montar (o cuando cambia el email)
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart]);
+    if (email) {
+      const stored = localStorage.getItem(`cart-${email}`);
+      setCart(stored ? JSON.parse(stored) : []);
+    } else {
+      setCart([]); // si no hay usuario, carrito vacío
+    }
+  }, [email]);
 
-  // Agregar pizza al carrito o aumentar cantidad
+  // ✅ Guardar carrito en localStorage solo si hay email
+  useEffect(() => {
+    if (email) {
+      localStorage.setItem(`cart-${email}`, JSON.stringify(cart));
+    }
+  }, [cart, email]);
+
+  // ✅ Agregar pizza al carrito o aumentar cantidad
   const addToCart = (pizza) => {
     setCart((prev) => {
-      const exists = prev.find(item => item.id === pizza.id)
+      const exists = prev.find(item => item.id === pizza.id);
       if (exists) {
         return prev.map(item =>
           item.id === pizza.id
@@ -28,7 +39,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Disminuir cantidad o eliminar si llega a 0
+  // ✅ Disminuir cantidad o eliminar si llega a 0
   const decreaseQuantity = (pizzaId) => {
     setCart((prev) => {
       return prev
@@ -37,26 +48,41 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
-        .filter(item => item.quantity > 0)
+        .filter(item => item.quantity > 0);
     });
+  };
+
+  // ✅ Vaciar carrito (sin borrar de localStorage)
+  const resetCart = () => {
+    if (email) {
+      localStorage.setItem(`cart-${email}`, JSON.stringify([])); // opcional: guardar vacío
+    }
+    setCart([]);
   };
 
   // Total de cada pizza
   const getSubtotal = (pizzaId) => {
-    const pizza = cart.find(item => item.id === pizzaId)
+    const pizza = cart.find(item => item.id === pizzaId);
     return pizza ? pizza.price * pizza.quantity : 0;
   };
 
   // Total general del carrito
   const getTotal = () => {
-    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, decreaseQuantity, getSubtotal, getTotal }}>
+    <CartContext.Provider value={{
+      cart,
+      addToCart,
+      decreaseQuantity,
+      resetCart,
+      getSubtotal,
+      getTotal,
+    }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCart = () => useContext(CartContext)
+export const useCart = () => useContext(CartContext);

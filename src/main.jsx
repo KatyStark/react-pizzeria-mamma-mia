@@ -9,12 +9,10 @@ import { UserProvider } from "./context/userContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CartProvider>
       <BrowserRouter>
         <UserProvider>
           <App />
         </UserProvider>
       </BrowserRouter>
-    </CartProvider>
   </StrictMode>
 );

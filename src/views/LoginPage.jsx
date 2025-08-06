@@ -1,37 +1,28 @@
-import React, { useState } from 'react'
+import { useState } from "react";
+import { useUser } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("")
-  const [clave, setClave] = useState("")
+  const [email, setEmail] = useState("");
+  const [clave, setClave] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState(false);
+  const { loginUser } = useUser();
+  const navigate = useNavigate();
 
-  const [error, setError] = useState(false)
-  const [mensaje, setMensaje] = useState("")
+  const validarDatos = async (e) => {
+    e.preventDefault();
 
-  const validarDatos = (e) => {
-    e.preventDefault()
-
-    // Validación de campos vacíos
-    if (!email.trim() || !clave.trim()) {
-      setError(true)
-      setMensaje("Todos los campos son obligatorios")
-      return
+    try {
+      await loginUser(email, clave);
+      setMensaje("Inicio de sesión exitoso");
+      setError(false);
+      navigate("/profile");
+    } catch (err) {
+      setMensaje("Error al iniciar sesión");
+      setError(true);
     }
-
-    // Validación de longitud de clave
-    if (clave.length <= 6) {
-      setError(true)
-      setMensaje("La contraseña debe tener más de 6 caracteres")
-      return
-    }
-
-    // Todo correcto
-    setError(false)
-    setMensaje("Inicio de sesión exitoso")
-
-    //Limpiar inputs cuando el login es correcto
-    setEmail("")
-    setClave("")
-  }
+  };
 
   return (
     <div className="contenedorRegistro">
@@ -39,23 +30,29 @@ const LoginPage = () => {
         <h3>Login</h3>
         <hr />
         <form onSubmit={validarDatos}>
-
           <p>Email: </p>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <p>Contraseña: </p>
-          <input type="password" value={clave} onChange={(e) => setClave(e.target.value)}
+          <input
+            type="password"
+            value={clave}
+            onChange={(e) => setClave(e.target.value)}
           />
 
-          {mensaje && <p style={{ color: error ? 'red' : 'green' }}>{mensaje}</p>}
+          {mensaje && (
+            <p style={{ color: error ? "red" : "green" }}>{mensaje}</p>
+          )}
 
           <button type="submit">Login</button>
-
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
